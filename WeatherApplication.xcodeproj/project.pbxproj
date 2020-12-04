@@ -24,11 +24,14 @@
 		390A0F3A257A09D00083C047 /* rainy.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F36257A09CF0083C047 /* rainy.json */; };
 		390A0F3B257A09D00083C047 /* cloudy.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F37257A09CF0083C047 /* cloudy.json */; };
 		390A0F3C257A09D00083C047 /* sunny.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F38257A09D00083C047 /* sunny.json */; };
-		390A0F3F257A09DC0083C047 /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F3E257A09DC0083C047 /* city.list.json */; };
 		390A0F48257A0A660083C047 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F46257A0A660083C047 /* CityManager.swift */; };
 		390A0F49257A0A660083C047 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F47257A0A660083C047 /* HomeViewModel.swift */; };
 		390A0F4C257A0A780083C047 /* cityListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F4B257A0A780083C047 /* cityListModel.swift */; };
 		390A0F50257A0A8F0083C047 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F4F257A0A8F0083C047 /* WeatherModel.swift */; };
+		390A0F57257A0FFA0083C047 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F56257A0FFA0083C047 /* LoginVC.swift */; };
+		390A0F5C257A135A0083C047 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F5B257A135A0083C047 /* Home.storyboard */; };
+		390A0F5F257A16A60083C047 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F5E257A16A60083C047 /* HomeVC.swift */; };
+		390A0F64257A1F090083C047 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F63257A1F090083C047 /* CityList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,11 +54,14 @@
 		390A0F36257A09CF0083C047 /* rainy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainy.json; sourceTree = "<group>"; };
 		390A0F37257A09CF0083C047 /* cloudy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudy.json; sourceTree = "<group>"; };
 		390A0F38257A09D00083C047 /* sunny.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunny.json; sourceTree = "<group>"; };
-		390A0F3E257A09DC0083C047 /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		390A0F46257A0A660083C047 /* CityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
 		390A0F47257A0A660083C047 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		390A0F4B257A0A780083C047 /* cityListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cityListModel.swift; sourceTree = "<group>"; };
 		390A0F4F257A0A8F0083C047 /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		390A0F56257A0FFA0083C047 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		390A0F5B257A135A0083C047 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		390A0F5E257A16A60083C047 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		390A0F63257A1F090083C047 /* CityList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +99,7 @@
 				390A0F43257A0A360083C047 /* Views */,
 				390A0F42257A0A260083C047 /* Controller */,
 				390A0F41257A09FB0083C047 /* Supporting files */,
-				390A0F32257A09A10083C047 /* Resources */,
-				390A0F2C257A09550083C047 /* Services */,
-				390A0F1C257A09230083C047 /* Helpers */,
+				390A0F15257A06C00083C047 /* Info.plist */,
 			);
 			path = WeatherApplication;
 			sourceTree = "<group>";
@@ -142,7 +146,7 @@
 		390A0F33257A09AE0083C047 /* Local Json */ = {
 			isa = PBXGroup;
 			children = (
-				390A0F3E257A09DC0083C047 /* city.list.json */,
+				390A0F63257A1F090083C047 /* CityList.json */,
 			);
 			path = "Local Json";
 			sourceTree = "<group>";
@@ -161,10 +165,12 @@
 		390A0F41257A09FB0083C047 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				390A0F32257A09A10083C047 /* Resources */,
+				390A0F2C257A09550083C047 /* Services */,
+				390A0F1C257A09230083C047 /* Helpers */,
 				390A0F07257A06BB0083C047 /* AppDelegate.swift */,
 				390A0F09257A06BB0083C047 /* SceneDelegate.swift */,
 				390A0F10257A06C00083C047 /* Assets.xcassets */,
-				390A0F15257A06C00083C047 /* Info.plist */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 			children = (
 				390A0F0D257A06BB0083C047 /* Main.storyboard */,
 				390A0F12257A06C00083C047 /* LaunchScreen.storyboard */,
+				390A0F5B257A135A0083C047 /* Home.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 		390A0F52257A0AAC0083C047 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				390A0F56257A0FFA0083C047 /* LoginVC.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 		390A0F53257A0AB60083C047 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				390A0F5E257A16A60083C047 /* HomeVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -285,12 +294,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				390A0F3A257A09D00083C047 /* rainy.json in Resources */,
-				390A0F3F257A09DC0083C047 /* city.list.json in Resources */,
 				390A0F39257A09D00083C047 /* weather.json in Resources */,
+				390A0F5C257A135A0083C047 /* Home.storyboard in Resources */,
 				390A0F14257A06C00083C047 /* LaunchScreen.storyboard in Resources */,
 				390A0F11257A06C00083C047 /* Assets.xcassets in Resources */,
 				390A0F0F257A06BB0083C047 /* Main.storyboard in Resources */,
 				390A0F3B257A09D00083C047 /* cloudy.json in Resources */,
+				390A0F64257A1F090083C047 /* CityList.json in Resources */,
 				390A0F3C257A09D00083C047 /* sunny.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,11 +321,13 @@
 				390A0F24257A09320083C047 /* SessionManager.swift in Sources */,
 				390A0F0A257A06BB0083C047 /* SceneDelegate.swift in Sources */,
 				390A0F49257A0A660083C047 /* HomeViewModel.swift in Sources */,
+				390A0F5F257A16A60083C047 /* HomeVC.swift in Sources */,
 				390A0F48257A0A660083C047 /* CityManager.swift in Sources */,
 				390A0F26257A09320083C047 /* Constants.swift in Sources */,
 				390A0F29257A09320083C047 /* ViewControllerExtensions.swift in Sources */,
 				390A0F4C257A0A780083C047 /* cityListModel.swift in Sources */,
 				390A0F27257A09320083C047 /* ProgressHud.swift in Sources */,
+				390A0F57257A0FFA0083C047 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

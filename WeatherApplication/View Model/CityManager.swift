@@ -14,7 +14,7 @@ class CityManager: NSObject {
         func getCityListResponse(onSuccess: @escaping([Any]?) -> ())
         {
             do {
-                if let file = Bundle.main.url(forResource: "city.list", withExtension: "json") {
+                if let file = Bundle.main.url(forResource: "CityList", withExtension: "json") {
                     let data = try Data(contentsOf: file)
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     if let object = json as? [String: Any] {
