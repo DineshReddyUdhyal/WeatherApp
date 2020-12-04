@@ -65,7 +65,9 @@ class LoginVC: UIViewController {
     @IBAction func btnLogin(_ sender: Any) {
         
         if emailTF.text != "" && ((emailTF.text?.validateAsEmail()) != nil)  {
+            let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             errorLabel.text = "Please fill a valid e-mail"
         }

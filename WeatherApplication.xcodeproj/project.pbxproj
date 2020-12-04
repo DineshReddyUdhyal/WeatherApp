@@ -32,6 +32,9 @@
 		390A0F5C257A135A0083C047 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F5B257A135A0083C047 /* Home.storyboard */; };
 		390A0F5F257A16A60083C047 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390A0F5E257A16A60083C047 /* HomeVC.swift */; };
 		390A0F64257A1F090083C047 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 390A0F63257A1F090083C047 /* CityList.json */; };
+		398AE5E1257A283B00381324 /* CityTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AE5DF257A283B00381324 /* CityTVCell.swift */; };
+		398AE5E2257A283B00381324 /* CityTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398AE5E0257A283B00381324 /* CityTVCell.xib */; };
+		398AE5E6257A316600381324 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AE5E5257A316600381324 /* TableViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		390A0F5B257A135A0083C047 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		390A0F5E257A16A60083C047 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		390A0F63257A1F090083C047 /* CityList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
+		398AE5DF257A283B00381324 /* CityTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTVCell.swift; sourceTree = "<group>"; };
+		398AE5E0257A283B00381324 /* CityTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityTVCell.xib; sourceTree = "<group>"; };
+		398AE5E5257A316600381324 /* TableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				390A0F21257A09320083C047 /* StoryboardConstants.swift */,
 				390A0F23257A09320083C047 /* StringExtensions.swift */,
 				390A0F22257A09320083C047 /* ViewControllerExtensions.swift */,
+				398AE5E5257A316600381324 /* TableViewExtensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -187,6 +194,7 @@
 		390A0F43257A0A360083C047 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				398AE5DE257A281C00381324 /* TVCell */,
 				390A0F0D257A06BB0083C047 /* Main.storyboard */,
 				390A0F12257A06C00083C047 /* LaunchScreen.storyboard */,
 				390A0F5B257A135A0083C047 /* Home.storyboard */,
@@ -234,6 +242,15 @@
 				390A0F5E257A16A60083C047 /* HomeVC.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		398AE5DE257A281C00381324 /* TVCell */ = {
+			isa = PBXGroup;
+			children = (
+				398AE5DF257A283B00381324 /* CityTVCell.swift */,
+				398AE5E0257A283B00381324 /* CityTVCell.xib */,
+			);
+			path = TVCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +316,7 @@
 				390A0F14257A06C00083C047 /* LaunchScreen.storyboard in Resources */,
 				390A0F11257A06C00083C047 /* Assets.xcassets in Resources */,
 				390A0F0F257A06BB0083C047 /* Main.storyboard in Resources */,
+				398AE5E2257A283B00381324 /* CityTVCell.xib in Resources */,
 				390A0F3B257A09D00083C047 /* cloudy.json in Resources */,
 				390A0F64257A1F090083C047 /* CityList.json in Resources */,
 				390A0F3C257A09D00083C047 /* sunny.json in Resources */,
@@ -316,6 +334,7 @@
 				390A0F08257A06BB0083C047 /* AppDelegate.swift in Sources */,
 				390A0F2A257A09320083C047 /* StringExtensions.swift in Sources */,
 				390A0F50257A0A8F0083C047 /* WeatherModel.swift in Sources */,
+				398AE5E1257A283B00381324 /* CityTVCell.swift in Sources */,
 				390A0F28257A09320083C047 /* StoryboardConstants.swift in Sources */,
 				390A0F25257A09320083C047 /* ButtonExtension.swift in Sources */,
 				390A0F24257A09320083C047 /* SessionManager.swift in Sources */,
@@ -328,6 +347,7 @@
 				390A0F4C257A0A780083C047 /* cityListModel.swift in Sources */,
 				390A0F27257A09320083C047 /* ProgressHud.swift in Sources */,
 				390A0F57257A0FFA0083C047 /* LoginVC.swift in Sources */,
+				398AE5E6257A316600381324 /* TableViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
