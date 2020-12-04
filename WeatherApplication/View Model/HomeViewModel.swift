@@ -11,7 +11,6 @@ class HomeViewModel: NSObject {
     var cityWeather : WeatherModel? = nil
     var errorMessage = String()
     
-    
     func getWeatherOfCity(city_name: String,completion: (() -> Void)?){
         
         let SET_URL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(city_name)&appid=\(ApiKey)")

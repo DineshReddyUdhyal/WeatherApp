@@ -20,12 +20,12 @@ class CityManager: NSObject {
                     if let object = json as? [String: Any] {
                         // json is a dictionary
                         let projectResult = object["city_list"] as! NSArray
-                        print(object)
+                        
                         onSuccess(projectResult as? [Any])
                         
                     } else if let object = json as? [Any] {
                         // json is an array
-                        print(object)
+                        
                         onSuccess(object)
                     } else {
                         print("JSON is invalid")

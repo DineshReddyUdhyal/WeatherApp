@@ -11,8 +11,8 @@ import UIKit
 extension UIButton {
     func appMainButtonStyle() {
         self.layer.cornerRadius = 8
-        self.backgroundColor = #colorLiteral(red: 0.3764705882, green: 0.3019607843, blue: 0.6392156863, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.6145741637)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        self.setTitleColor(UIColor.white, for: [])
+        self.setTitleColor(UIColor.black, for: [])
     }
 }

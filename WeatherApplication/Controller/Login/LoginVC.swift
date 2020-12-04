@@ -7,6 +7,7 @@
 
 import UIKit
 import LocalAuthentication
+import Lottie
 
 class LoginVC: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
@@ -16,6 +17,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btnFaceID: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var bgAnimationView: AnimationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,8 @@ class LoginVC: UIViewController {
         errorLabel.textColor = UIColor.systemRed
         
         emailTF.delegate = self
-        emailTF.placeholder = "User E-mail"
+        emailTF.attributedPlaceholder = NSAttributedString(string: "User E-mail",
+                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         
         NotificationCenter.default.addObserver(
             self,
@@ -45,6 +48,14 @@ class LoginVC: UIViewController {
         btnFaceID.appMainButtonStyle()
         
         self.hideKeyboardWhenTappedAround() // to hide keyboard when tapped around
+        
+//        let path = Bundle.main.path(forResource: "cloudy",
+//                                    ofType: "json") ?? ""
+//        bgAnimationView.animation = Animation.filepath(path)
+//        bgAnimationView!.contentMode = .scaleToFill
+//        bgAnimationView!.loopMode = .loop
+//        bgAnimationView!.animationSpeed = 1.0
+//        bgAnimationView!.play()
     }
     // Note: Below function moves view up when keyboard appears
     @objc func keyboardWillShow(notification: Notification) {
@@ -64,9 +75,8 @@ class LoginVC: UIViewController {
     
     @IBAction func btnLogin(_ sender: Any) {
         
-        if emailTF.text != "" && ((emailTF.text?.validateAsEmail()) != nil)  {
+        if emailTF.text != "" && emailTF.text?.validateAsEmail() == true{
             let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-            
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             errorLabel.text = "Please fill a valid e-mail"
