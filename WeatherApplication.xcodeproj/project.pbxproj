@@ -39,7 +39,8 @@
 		398AE5F2257A438000381324 /* WeatherTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 398AE5F0257A438000381324 /* WeatherTVCell.xib */; };
 		398AE5F5257A441600381324 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AE5F4257A441600381324 /* WeatherViewModel.swift */; };
 		398AE5F9257A446000381324 /* WeatherListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398AE5F8257A446000381324 /* WeatherListModel.swift */; };
-		39ACF6AB257A6FBA007BEF2E /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 39ACF6AA257A6FBA007BEF2E /* city.list.json */; };
+		39ACF6AE257A7086007BEF2E /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 39ACF6AD257A7086007BEF2E /* CityList.json */; };
+		39ACF6B6257A8417007BEF2E /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39ACF6B5257A8417007BEF2E /* SplashVC.swift */; };
 		BA87D786A64499AA73154B48 /* Pods_WeatherApplication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2F14F7344B19A30DACB78E /* Pods_WeatherApplication.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +79,8 @@
 		398AE5F0257A438000381324 /* WeatherTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherTVCell.xib; sourceTree = "<group>"; };
 		398AE5F4257A441600381324 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		398AE5F8257A446000381324 /* WeatherListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListModel.swift; sourceTree = "<group>"; };
-		39ACF6AA257A6FBA007BEF2E /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
+		39ACF6AD257A7086007BEF2E /* CityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
+		39ACF6B5257A8417007BEF2E /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		3FF14DBEF991012F10AF9EBA /* Pods-WeatherApplication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApplication.release.xcconfig"; path = "Target Support Files/Pods-WeatherApplication/Pods-WeatherApplication.release.xcconfig"; sourceTree = "<group>"; };
 		867665170A6026B779249173 /* Pods-WeatherApplication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApplication.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApplication/Pods-WeatherApplication.debug.xcconfig"; sourceTree = "<group>"; };
 		BB2F14F7344B19A30DACB78E /* Pods_WeatherApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,7 +180,7 @@
 		390A0F33257A09AE0083C047 /* Local Json */ = {
 			isa = PBXGroup;
 			children = (
-				39ACF6AA257A6FBA007BEF2E /* city.list.json */,
+				39ACF6AD257A7086007BEF2E /* CityList.json */,
 			);
 			path = "Local Json";
 			sourceTree = "<group>";
@@ -210,6 +212,7 @@
 		390A0F42257A0A260083C047 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				39ACF6B2257A83A6007BEF2E /* Splash */,
 				390A0F53257A0AB60083C047 /* Home */,
 				390A0F52257A0AAC0083C047 /* Login */,
 			);
@@ -299,6 +302,14 @@
 			path = WeatherList;
 			sourceTree = "<group>";
 		};
+		39ACF6B2257A83A6007BEF2E /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				39ACF6B5257A8417007BEF2E /* SplashVC.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
 		F82BDEE5E86141BD5645C689 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +378,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39ACF6AE257A7086007BEF2E /* CityList.json in Resources */,
 				390A0F3A257A09D00083C047 /* rainy.json in Resources */,
 				390A0F39257A09D00083C047 /* weather.json in Resources */,
 				398AE5F2257A438000381324 /* WeatherTVCell.xib in Resources */,
@@ -374,7 +386,6 @@
 				390A0F14257A06C00083C047 /* LaunchScreen.storyboard in Resources */,
 				390A0F11257A06C00083C047 /* Assets.xcassets in Resources */,
 				390A0F0F257A06BB0083C047 /* Main.storyboard in Resources */,
-				39ACF6AB257A6FBA007BEF2E /* city.list.json in Resources */,
 				398AE5E2257A283B00381324 /* CityTVCell.xib in Resources */,
 				390A0F3B257A09D00083C047 /* cloudy.json in Resources */,
 				390A0F3C257A09D00083C047 /* sunny.json in Resources */,
@@ -435,6 +446,7 @@
 				390A0F2A257A09320083C047 /* StringExtensions.swift in Sources */,
 				390A0F50257A0A8F0083C047 /* WeatherModel.swift in Sources */,
 				398AE5E1257A283B00381324 /* CityTVCell.swift in Sources */,
+				39ACF6B6257A8417007BEF2E /* SplashVC.swift in Sources */,
 				390A0F28257A09320083C047 /* StoryboardConstants.swift in Sources */,
 				390A0F25257A09320083C047 /* ButtonExtension.swift in Sources */,
 				390A0F24257A09320083C047 /* SessionManager.swift in Sources */,

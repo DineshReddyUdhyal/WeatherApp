@@ -134,6 +134,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="animateView" destination="cEq-va-AeF" id="oqF-cr-66f"/>
                         <outlet property="cityListTableView" destination="Kpx-Xa-pdj" id="QDj-a4-OMZ"/>
                         <outlet property="cityTF" destination="XJc-IW-yu2" id="Yh9-xG-VlY"/>
                         <outlet property="emptyView" destination="7wd-Ya-eVe" id="KEd-Sb-vaD"/>

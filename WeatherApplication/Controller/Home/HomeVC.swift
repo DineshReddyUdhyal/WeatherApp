@@ -12,8 +12,9 @@ class HomeVC: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var cityTF: UITextField!
     @IBOutlet weak var cityListTableView: UITableView!
-    @IBOutlet weak var emptyView: AnimationView!
+    @IBOutlet weak var emptyView: UIView!
     
+    @IBOutlet weak var animateView: AnimationView!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -27,28 +28,34 @@ class HomeVC: UIViewController, UITextFieldDelegate {
     var cityMenuArray = [cityListModel]()
     lazy var searchArray = [cityListModel]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        cityTF.delegate = self
-        cityTF.placeholder = "Please enter city name"
-        cityListTableView.delegate = self
-        cityListTableView.dataSource = self
-        cityListTableView.register(CityTVCell.cellNib, forCellReuseIdentifier: CityTVCell.cellId)
-        cityTF.addTarget(self, action: #selector(HomeVC.textFieldDidChange(_:)), for: .editingChanged)
-
-        getCityListData()
-        
+    override func viewDidAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard.string(forKey: "City_Name")
         
         if defaults != nil {
             cityListTableView.isHidden = true
             emptyView.isHidden = false
             self.cityTF.text = defaults ?? ""
-            self.getWeather(city_name: defaults ?? "")
+            
+            DispatchQueue.global(qos: .background).async {
+                self.getWeather(city_name: defaults ?? "")
+            }
         } else {
             cityListTableView.isHidden = false
             emptyView.isHidden = true
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        cityTF.delegate = self
+        cityTF.placeholder = "Please enter city name"
+        cityListTableView.delegate = self
+        cityListTableView.dataSource = self
+        cityListTableView.tableFooterView = UIView()
+        cityListTableView.register(CityTVCell.cellNib, forCellReuseIdentifier: CityTVCell.cellId)
+        cityTF.addTarget(self, action: #selector(HomeVC.textFieldDidChange(_:)), for: .editingChanged)
+
+        getCityListData()
         
     }
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -89,7 +96,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CityTVCell.cellId, for: indexPath) as! CityTVCell
-        cell.textLabel?.text = "\(self.searchArray[indexPath.row].name ?? ""), \(self.searchArray[indexPath.row].state ?? "" ), \(self.searchArray[indexPath.row].country ?? "")"
+        cell.textLabel?.text = "\(self.searchArray[indexPath.row].name ?? ""), \(self.searchArray[indexPath.row].country ?? "")"
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -108,43 +115,34 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     fileprivate func CallLottie(jsonFile: String) {
+        animateView.backgroundColor = .clear
         let path = Bundle.main.path(forResource: jsonFile,
                                     ofType: "json") ?? ""
-        emptyView.animation = Animation.filepath(path)
-        emptyView!.contentMode = .scaleAspectFit
-        emptyView!.loopMode = .loop
-        emptyView!.animationSpeed = 0.5
-        emptyView!.play()
+        animateView.animation = Animation.filepath(path)
+        animateView!.contentMode = .scaleAspectFit
+        animateView!.loopMode = .loop
+        animateView!.animationSpeed = 1
+        animateView!.play()
     }
     
     func getWeather(city_name: String){
         HomeVM.getWeatherOfCity(city_name: city_name) {
             DispatchQueue.main.async {
-                
-                //UserDefaults.standard.setValue(city_name, forKey: "City_Name")
-                
-//                //MARK: To display error message
-//                if self.HomeVM.errorMessage != "" {
-//                    self.emptyView.isHidden = false
-////                    self.weatherView.isHidden = true
-//                    self.emptyView.backgroundColor = .white
-////                    self.errorLabel.text = self.HomeVM.errorMessage
-//                } else {
-//                    self.emptyView.isHidden = true
-////                    self.weatherView.isHidden = false
-//                }
-                
                 //MARK:  for lottie weather according to weather report
                 if self.HomeVM.cityWeather?.weather?[0].main?.contains("Clear") == true{
                     self.CallLottie(jsonFile: "sunny")
-                   // self.weatherView.backgroundColor = UIColor(red: 0.36, green: 0.79, blue: 1.00, alpha: 1.00)
+                    self.emptyView.backgroundColor = UIColor(red: 0.36, green: 0.79, blue: 1.00, alpha: 0.7)
                    
                 } else if self.HomeVM.cityWeather?.weather?[0].main?.contains("Clouds") == true {
                     self.CallLottie(jsonFile: "rainy")
-                    //self.weatherView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 1.00)
-                } else {
+                    self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
+                } else if self.HomeVM.cityWeather?.weather?[0].main?.contains("Drizzle") == true {
+                    self.CallLottie(jsonFile: "rainy")
+                    self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
+                }
+                else {
                     self.CallLottie(jsonFile: "cloudy")
-                    //self.weatherView.backgroundColor = UIColor(red: 0.82, green: 0.89, blue: 0.93, alpha: 1.00)
+                    self.emptyView.backgroundColor = UIColor(red: 0.82, green: 0.89, blue: 0.93, alpha: 0.7)
                 }
                 
                 self.placeLabel.text = "Place : \(self.HomeVM.cityWeather?.sys?.country ?? "") , \(self.HomeVM.cityWeather?.name ?? "")"

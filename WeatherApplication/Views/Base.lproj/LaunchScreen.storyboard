@@ -15,28 +15,8 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weatherImg" translatesAutoresizingMaskIntoConstraints="NO" id="UlD-I0-jET">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6E-mj-5Tm">
-                                <rect key="frame" x="20" y="84" width="374" height="48"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="UlD-I0-jET" secondAttribute="bottom" id="08X-Et-oJL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UlD-I0-jET" secondAttribute="trailing" id="1wQ-N5-Nok"/>
-                            <constraint firstItem="o6E-mj-5Tm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9pH-3I-sMy"/>
-                            <constraint firstItem="UlD-I0-jET" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OeX-H2-mDP"/>
-                            <constraint firstItem="UlD-I0-jET" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="W8n-27-ARS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o6E-mj-5Tm" secondAttribute="trailing" constant="20" id="aOn-OS-OMt"/>
-                            <constraint firstItem="o6E-mj-5Tm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="m4H-So-G7x"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -45,7 +25,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="weatherImg" width="320" height="180"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

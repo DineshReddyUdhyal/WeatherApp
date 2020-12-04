@@ -8,6 +8,7 @@
 import UIKit
 import LocalAuthentication
 import Lottie
+import FBSDKLoginKit
 
 class LoginVC: UIViewController {
     @IBOutlet weak var emailTF: UITextField!
@@ -15,17 +16,32 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var btnLogin: UIButton!
     @IBOutlet weak var btnFaceID: UIButton!
+    @IBOutlet weak var myFB: FBLoginButton!
     
+    @IBOutlet weak var btnFaceBook: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
-//    @IBOutlet weak var bgAnimationView: AnimationView!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //facboookLogin()
+        myFB.delegate = self
+        myFB.permissions = ["public_profile", "email"]
+        myFB.backgroundColor = UIColor.clear
+        
+        facboookLogin()
         
         UpdateUI()
-        // Do any additional setup after loading the view.
+        
     }
     fileprivate func UpdateUI() {
         errorLabel.text = ""
@@ -49,13 +65,6 @@ class LoginVC: UIViewController {
         
         self.hideKeyboardWhenTappedAround() // to hide keyboard when tapped around
         
-//        let path = Bundle.main.path(forResource: "cloudy",
-//                                    ofType: "json") ?? ""
-//        bgAnimationView.animation = Animation.filepath(path)
-//        bgAnimationView!.contentMode = .scaleToFill
-//        bgAnimationView!.loopMode = .loop
-//        bgAnimationView!.animationSpeed = 1.0
-//        bgAnimationView!.play()
     }
     // Note: Below function moves view up when keyboard appears
     @objc func keyboardWillShow(notification: Notification) {
@@ -76,8 +85,10 @@ class LoginVC: UIViewController {
     @IBAction func btnLogin(_ sender: Any) {
         
         if emailTF.text != "" && emailTF.text?.validateAsEmail() == true{
-            let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-            self.navigationController?.pushViewController(vc, animated: true)
+            UserDefaults.standard.setValue(true, forKey: sessionKey.loggedInStatus)
+            SessionManager.updateRootVC()
+//            let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+//            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             errorLabel.text = "Please fill a valid e-mail"
         }
@@ -87,6 +98,11 @@ class LoginVC: UIViewController {
     @IBAction func btnTouchID(_ sender: Any) {
         self.authenticateUserTouchID()
     }
+    
+    @IBAction func btnFaceBook(_ sender: Any) {
+        
+    }
+    
     
 }
 //MARK:- Touch or face id
@@ -163,51 +179,51 @@ extension LoginVC : UITextFieldDelegate {
     
 }
 
-
 //MARK:- Face book login
-//extension LoginVC {
-//    fileprivate func facboookLogin() {
-//        if let token = AccessToken.current,
-//           !token.isExpired {
-//            let token = token.tokenString
-//            let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
-//            request.start { (connection, result, err) in
-//
-//                guard let Info = result as? [String: Any] else { return }
-//                if let userName = Info["name"] as? String
-//                {
-//                    let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC")
-//                    self.navigationController?.pushViewController(vc, animated: false)
-//
-//                    print("userName \(userName)")
-//
-//                }
-//            }
-//        } else {
+extension LoginVC {
+    fileprivate func facboookLogin() {
+        if let token = AccessToken.current,
+           !token.isExpired {
+            let token = token.tokenString
+            let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
+            request.start { (connection, result, err) in
+                
+                guard let Info = result as? [String: Any] else { return }
+                if let userName = Info["name"] as? String
+                {
+                    print("userName \(userName)")
+                    let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC")
+                    self.navigationController?.pushViewController(vc, animated: false)
+                    
+                }
+            }
+        }
+//        else {
 //            print("Token expired")
-//            let loginButton = FBLoginButton()
-//            loginButton.center = view.center
-//            loginButton.delegate = self
-//            loginButton.permissions = ["public_profile", "email"]
-//            view.addSubview(loginButton)
+////            let loginButton = FBLoginButton()
+////            loginButton.center = myFB.center
+//            myFB.delegate = self
+//            myFB.permissions = ["public_profile", "email"]
+//            myFB.backgroundColor = UIColor.clear
+////            myFB.addSubview(loginButton)
 //        }
-//    }
-//}
-//extension LoginVC: LoginButtonDelegate {
-//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//        let token = result?.token?.tokenString
-//        let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
-//        request.start { (connection, result, err) in
-//            guard let Info = result as? [String: Any] else { return }
-//            if let userName = Info["name"] as? String
-//            {
-//                print(userName)
-//            }
-//        }
-//    }
-//
-//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//
-//    }
-//}
+    }
+}
 
+extension LoginVC: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        let token = result?.token?.tokenString
+        let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
+        request.start { (connection, result, err) in
+            guard let Info = result as? [String: Any] else { return }
+            if let userName = Info["name"] as? String
+            {
+                print(userName)
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        
+    }
+}

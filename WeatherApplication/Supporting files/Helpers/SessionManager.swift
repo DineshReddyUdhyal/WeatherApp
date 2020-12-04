@@ -17,12 +17,13 @@ class SessionManager {
         var rootVC : UIViewController?
         
         if(status == true){
-            rootVC = homeSB.instantiateViewController(withIdentifier: "HomeVC")
+            print("Called")
+            rootVC = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
         }else{
-            rootVC = mainSB.instantiateViewController(withIdentifier: "LoginVC")
+            rootVC = mainSB.instantiateViewController(withIdentifier: "SplashVC") as! SplashVC
         }
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = rootVC
+            appDelegate.window?.rootViewController = rootVC
         
     }
     static func logoutUser() {
