@@ -6,6 +6,7 @@ target 'WeatherApplication' do
   use_frameworks!
 pod 'lottie-ios'
 pod 'FBSDKLoginKit'
+pod 'Charts'
   # Pods for WeatherApplication
 
 end

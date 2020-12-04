@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - FBSDKCoreKit (8.2.0):
     - FBSDKCoreKit/Basics (= 8.2.0)
     - FBSDKCoreKit/Core (= 8.2.0)
@@ -12,20 +15,23 @@ PODS:
   - lottie-ios (3.1.9)
 
 DEPENDENCIES:
+  - Charts
   - FBSDKLoginKit
   - lottie-ios
 
 SPEC REPOS:
   trunk:
+    - Charts
     - FBSDKCoreKit
     - FBSDKLoginKit
     - lottie-ios
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
 
-PODFILE CHECKSUM: 3162859e2df70a19a1423595e35e4317b5f2a617
+PODFILE CHECKSUM: 0d9f8dc50a33337a83f04bd41f669686b73e5734
 
 COCOAPODS: 1.9.3

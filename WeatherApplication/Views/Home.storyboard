@@ -182,10 +182,37 @@
             </objects>
             <point key="canvasLocation" x="271" y="-38"/>
         </scene>
+        <!--View ChartsVC-->
+        <scene sceneID="vrJ-Lx-5Se">
+            <objects>
+                <viewController storyboardIdentifier="ViewChartsVC" id="Bru-Wt-ra8" customClass="ViewChartsVC" customModule="WeatherApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nEu-mU-P5P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK9-l6-WJ4" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fDn-wl-RVg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fDn-wl-RVg" firstAttribute="trailing" secondItem="qK9-l6-WJ4" secondAttribute="trailing" id="2iP-zm-x8r"/>
+                            <constraint firstItem="qK9-l6-WJ4" firstAttribute="top" secondItem="fDn-wl-RVg" secondAttribute="top" id="7tO-b8-uWC"/>
+                            <constraint firstItem="qK9-l6-WJ4" firstAttribute="leading" secondItem="fDn-wl-RVg" secondAttribute="leading" id="ogB-bU-Cbb"/>
+                            <constraint firstItem="fDn-wl-RVg" firstAttribute="bottom" secondItem="qK9-l6-WJ4" secondAttribute="bottom" id="rhx-Zv-dNZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="barChart" destination="qK9-l6-WJ4" id="hK3-dr-Cgb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gJ4-Jn-qAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1005.7971014492755" y="-38.169642857142854"/>
+        </scene>
     </scenes>
-    <designables>
-        <designable name="cEq-va-AeF"/>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

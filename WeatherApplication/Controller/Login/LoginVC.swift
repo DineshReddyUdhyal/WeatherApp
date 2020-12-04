@@ -86,9 +86,9 @@ class LoginVC: UIViewController {
         
         if emailTF.text != "" && emailTF.text?.validateAsEmail() == true{
             UserDefaults.standard.setValue(true, forKey: sessionKey.loggedInStatus)
-            SessionManager.updateRootVC()
-//            let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
-//            self.navigationController?.pushViewController(vc, animated: true)
+//            SessionManager.updateRootVC()
+            let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             errorLabel.text = "Please fill a valid e-mail"
         }

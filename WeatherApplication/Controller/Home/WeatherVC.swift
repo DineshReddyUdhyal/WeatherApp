@@ -24,7 +24,14 @@ class WeatherVC: UIViewController {
         weatherTableView.register(WeatherTVCell.cellNib, forCellReuseIdentifier: WeatherTVCell.cellId)
         weatherTableView.tableFooterView = UIView()
         getWeatherList()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Weather", style: .plain, target: self, action: #selector(btnViewCharts))
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func btnViewCharts(){
+        let vc = homeSB.instantiateViewController(withIdentifier: "ViewChartsVC") as! ViewChartsVC
+        vc.numbers = (self.weatherListVM.cityWeatherList?.hourly)!
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -41,9 +48,11 @@ extension WeatherVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
+    
     
 }
 extension WeatherVC {
