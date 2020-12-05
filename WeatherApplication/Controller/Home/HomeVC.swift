@@ -30,7 +30,7 @@ class HomeVC: UIViewController {
     lazy var searchArray = [cityListModel]()
     
     override func viewDidAppear(_ animated: Bool) {
-        let defaults = UserDefaults.standard.string(forKey: "City_Name")
+        let defaults = UserDefaults.standard.string(forKey: weatherData.cityName)
         
         //MARK: To check if user had searched for city name previously
         
@@ -39,10 +39,10 @@ class HomeVC: UIViewController {
             emptyView.isHidden = false
             self.cityTF.text = defaults ?? ""
             
-            let latDefaults = UserDefaults.standard.string(forKey: "latValue")
+            let latDefaults = UserDefaults.standard.string(forKey: weatherData.latitude)
             self.lat = Double(latDefaults ?? "0.0")!
             
-            let longDefaults = UserDefaults.standard.string(forKey: "longValue")
+            let longDefaults = UserDefaults.standard.string(forKey: weatherData.longitude)
             self.long = Double(longDefaults ?? "0.0")!
             
             DispatchQueue.global(qos: .background).async {
@@ -54,7 +54,6 @@ class HomeVC: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         UpdateUI()
@@ -65,6 +64,9 @@ class HomeVC: UIViewController {
     
     @objc func btnLogout(){
         UserDefaults.standard.setValue(false, forKey: sessionKey.loggedInStatus)
+        UserDefaults.standard.setValue(nil, forKey: weatherData.cityName)
+        UserDefaults.standard.setValue(nil, forKey: weatherData.longitude)
+        UserDefaults.standard.setValue(nil, forKey: weatherData.latitude)
         let vc = mainSB.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
         self.navigationController?.pushViewController(vc, animated: true)
 
@@ -111,9 +113,9 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.lat = self.searchArray[indexPath.row].coord?.lat ?? 0
         self.long = self.searchArray[indexPath.row].coord?.lon ?? 0
-        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lat ?? 0, forKey: "latValue")
-        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lon ?? 0, forKey: "longValue")
-        UserDefaults.standard.setValue(self.searchArray[indexPath.row].name, forKey: "City_Name")
+        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lat ?? 0, forKey: weatherData.latitude)
+        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lon ?? 0, forKey: weatherData.longitude)
+        UserDefaults.standard.setValue(self.searchArray[indexPath.row].name, forKey: weatherData.cityName)
         print("Lat = \(self.lat) and lat = \(self.long)")
         
         let vc = homeSB.instantiateViewController(withIdentifier: "WeatherVC") as! WeatherVC

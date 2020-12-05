@@ -11,6 +11,12 @@ struct sessionKey {
     static var loggedInStatus = "loggedInStatus"
 }
 
+struct weatherData {
+    static var cityName = "cityName"
+    static var latitude = "latitude"
+    static var longitude = "longitude"
+}
+
 //Google places
 let mapsApiKey = "AIzaSyCyzHxqCK6iHyVBVTSFy-_zTzejKbbENjg"
 
