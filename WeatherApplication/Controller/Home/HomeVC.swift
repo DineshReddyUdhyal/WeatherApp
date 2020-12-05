@@ -80,6 +80,9 @@ class HomeVC: UIViewController {
     }
     
     fileprivate func UpdateUI() {
+        
+        animateView.backgroundColor = .clear
+        
         //MARK: ForGradient view
         cardView.setGradientBackground(colorTop: UIColor(red:0.87, green:0.25, blue:0.30, alpha:1.0), colorBottom: UIColor(red:0.95, green:0.37, blue:0.34, alpha:0.6))
         
@@ -125,7 +128,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     fileprivate func CallLottie(jsonFile: String) {
-        animateView.backgroundColor = .clear
+        
         let path = Bundle.main.path(forResource: jsonFile,
                                     ofType: "json") ?? ""
         animateView.animation = Animation.filepath(path)
