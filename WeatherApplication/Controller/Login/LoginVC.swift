@@ -164,7 +164,7 @@ extension LoginVC{
         
     }
 }
-
+//MARK:- Textfield delegate
 extension LoginVC : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -193,15 +193,6 @@ extension LoginVC {
                 }
             }
         }
-//        else {
-//            print("Token expired")
-////            let loginButton = FBLoginButton()
-////            loginButton.center = myFB.center
-//            myFB.delegate = self
-//            myFB.permissions = ["public_profile", "email"]
-//            myFB.backgroundColor = UIColor.clear
-////            myFB.addSubview(loginButton)
-//        }
     }
 }
 

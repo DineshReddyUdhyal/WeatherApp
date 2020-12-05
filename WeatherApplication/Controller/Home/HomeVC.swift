@@ -8,7 +8,7 @@
 import UIKit
 import Lottie
 
-class HomeVC: UIViewController, UITextFieldDelegate {
+class HomeVC: UIViewController {
 
     @IBOutlet weak var cityTF: UITextField!
     @IBOutlet weak var cityListTableView: UITableView!
@@ -31,6 +31,8 @@ class HomeVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard.string(forKey: "City_Name")
+        
+        //MARK: To check if user had searched for city name previously
         
         if defaults != nil {
             cityListTableView.isHidden = true
@@ -55,18 +57,7 @@ class HomeVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        cardView.clipsToBounds = true
-        cardView.setGradientBackground(colorTop: UIColor(red:0.87, green:0.25, blue:0.30, alpha:1.0), colorBottom: UIColor(red:0.95, green:0.37, blue:0.34, alpha:0.6))
-        
-        cityTF.delegate = self
-        cityTF.placeholder = "Please enter city name"
-        cityListTableView.delegate = self
-        cityListTableView.dataSource = self
-        cityListTableView.tableFooterView = UIView()
-        cityListTableView.register(CityTVCell.cellNib, forCellReuseIdentifier: CityTVCell.cellId)
-        cityTF.addTarget(self, action: #selector(HomeVC.textFieldDidChange(_:)), for: .editingChanged)
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogout))
+        UpdateUI()
 
         getCityListData()
         
@@ -75,26 +66,10 @@ class HomeVC: UIViewController, UITextFieldDelegate {
     @objc func btnLogout(){
         UserDefaults.standard.setValue(false, forKey: sessionKey.loggedInStatus)
         let vc = mainSB.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-        
         self.navigationController?.pushViewController(vc, animated: true)
-//        self.navigationController?.popViewController(animated: true)
+
     }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        
-        let searchText = cityTF.text!
-        self.cityListTableView.isHidden = false
-        self.emptyView.isHidden = true
-        
-        searchArray = searchText.isEmpty ? self.cityMenuArray : self.cityMenuArray.filter{($0.name?.capitalized.contains(searchText.capitalized))!}
-        cityListTableView.reloadData()
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // User finished typing (hit return): hide the keyboard.
-        textField.resignFirstResponder()
-        return true
-    }
-    
+   
     @IBAction func btnViewMore(_ sender: Any) {
         let vc = homeSB.instantiateViewController(withIdentifier: "WeatherVC") as! WeatherVC
         vc.getLat = self.lat.description
@@ -102,20 +77,22 @@ class HomeVC: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func getCityListData() {
-        ProgressHud.showActivityIndicator(uiView: self.view)
-            DispatchQueue.main.async {
-                CityManager.sharedInstance.getCityListResponse(onSuccess: {json in
-                    let array = json as? [JSON]
-                    for dictionary in array! {
-                        guard let City_Items = cityListModel(json: dictionary) else { continue }
-                        self.cityMenuArray.append(City_Items)
-                    }
-                    ProgressHud.hideActivityIndicator(uiView: self.view)
-                })
-                
-            }
+    fileprivate func UpdateUI() {
+        //MARK: ForGradient view
+        cardView.setGradientBackground(colorTop: UIColor(red:0.87, green:0.25, blue:0.30, alpha:1.0), colorBottom: UIColor(red:0.95, green:0.37, blue:0.34, alpha:0.6))
+        
+        cityTF.delegate = self
+        cityTF.placeholder = "Please enter city name"
+        cityListTableView.delegate = self
+        cityListTableView.dataSource = self
+        cityListTableView.tableFooterView = UIView()
+        cityListTableView.register(CityTVCell.cellNib, forCellReuseIdentifier: CityTVCell.cellId) // Register nib file
+        cityTF.addTarget(self, action: #selector(HomeVC.textFieldDidChange(_:)), for: .editingChanged)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogout))
     }
+    
+    
 }
 extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -156,6 +133,26 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
         animateView!.play()
     }
     
+   
+}
+//MARK:- Api calls
+extension HomeVC {
+    //MARK: For calling local JSON
+    func getCityListData() {
+        ProgressHud.showActivityIndicator(uiView: self.view)
+            DispatchQueue.main.async {
+                CityManager.sharedInstance.getCityListResponse(onSuccess: {json in
+                    let array = json as? [JSON]
+                    for dictionary in array! {
+                        guard let City_Items = cityListModel(json: dictionary) else { continue }
+                        self.cityMenuArray.append(City_Items)
+                    }
+                    ProgressHud.hideActivityIndicator(uiView: self.view)
+                })
+                
+            }
+    }
+    
     func getWeather(city_name: String){
         HomeVM.getWeatherOfCity(city_name: city_name) {
             DispatchQueue.main.async {
@@ -183,4 +180,23 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+}
+
+extension HomeVC: UITextFieldDelegate {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        let searchText = cityTF.text!
+        self.cityListTableView.isHidden = false
+        self.emptyView.isHidden = true
+        
+        searchArray = searchText.isEmpty ? self.cityMenuArray : self.cityMenuArray.filter{($0.name?.capitalized.contains(searchText.capitalized))!}
+        cityListTableView.reloadData()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // User finished typing (hit return): hide the keyboard.
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

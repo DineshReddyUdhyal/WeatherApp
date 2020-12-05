@@ -24,7 +24,6 @@ class WeatherVC: UIViewController {
         weatherTableView.register(WeatherTVCell.cellNib, forCellReuseIdentifier: WeatherTVCell.cellId)
         weatherTableView.tableFooterView = UIView()
         getWeatherList()
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Weather Graph", style: .plain, target: self, action: #selector(btnViewCharts))
         
         

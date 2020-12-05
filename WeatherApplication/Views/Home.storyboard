@@ -87,7 +87,10 @@
                                                                             <constraint firstAttribute="width" constant="100" id="c0D-We-3af"/>
                                                                             <constraint firstAttribute="height" constant="40" id="pek-Sh-NxQ"/>
                                                                         </constraints>
-                                                                        <state key="normal" title="View more"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                                        <state key="normal" title="View more">
+                                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
                                                                         <connections>
                                                                             <action selector="btnViewMore:" destination="laP-gt-VfT" eventType="touchUpInside" id="jmm-1u-rBk"/>
                                                                         </connections>
@@ -239,6 +242,9 @@
             <point key="canvasLocation" x="1005.7971014492755" y="-38.169642857142854"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="cEq-va-AeF"/>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
