@@ -80,6 +80,12 @@ class HomeVC: UIViewController {
     }
     
     fileprivate func UpdateUI() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.placeLabel.text = ""
+        self.weatherLabel.text = ""
+        self.temperatureLabel.text = ""
+        self.humidityLabel.text = ""
         
         animateView.backgroundColor = .clear
         
