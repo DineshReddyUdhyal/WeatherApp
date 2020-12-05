@@ -25,7 +25,7 @@ class ViewChartsVC: UIViewController {
         }
         
         let line1 = LineChartDataSet(entries: dataEntries, label: "Weather App")
-        line1.colors = ChartColorTemplates.colorful()//[NSUIColor.black]
+        line1.colors = ChartColorTemplates.colorful()
  
         let data = LineChartData()
         data.addDataSet(line1)
