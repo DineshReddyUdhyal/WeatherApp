@@ -18,7 +18,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btnFaceID: UIButton!
     @IBOutlet weak var myFB: FBLoginButton!
     
-    @IBOutlet weak var btnFaceBook: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +85,7 @@ class LoginVC: UIViewController {
         
         if emailTF.text != "" && emailTF.text?.validateAsEmail() == true{
             UserDefaults.standard.setValue(true, forKey: sessionKey.loggedInStatus)
-//            SessionManager.updateRootVC()
+            
             let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -98,11 +97,6 @@ class LoginVC: UIViewController {
     @IBAction func btnTouchID(_ sender: Any) {
         self.authenticateUserTouchID()
     }
-    
-    @IBAction func btnFaceBook(_ sender: Any) {
-        
-    }
-    
     
 }
 //MARK:- Touch or face id
@@ -118,6 +112,7 @@ extension LoginVC{
                 {
                     DispatchQueue.main.async{
                         print("Authentication success by the system")
+                        UserDefaults.standard.setValue(true, forKey: sessionKey.loggedInStatus)
                         let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC")
                         
                         self.navigationController?.pushViewController(vc, animated: true)

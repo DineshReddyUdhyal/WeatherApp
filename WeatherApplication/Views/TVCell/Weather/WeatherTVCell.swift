@@ -14,20 +14,28 @@ class WeatherTVCell: UITableViewCell {
     @IBOutlet weak var CityNameLabel: UILabel!
     @IBOutlet weak var tempInfoLabel: UILabel!
     
+    @IBOutlet weak var bgView: UIView!
+    
     var itemData : WeatherListModelHourly? {
         didSet {
             CityNameLabel.text = itemData?.weather?[0].main
             
-//            let date = NSDate(timeIntervalSince1970: itemData?.dt ?? 0)
-//            tempInfoLabel.text = "Time : \(date.description)"
+//            let date = Date(timeIntervalSince1970: itemData?.dt ?? 0)
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+//                dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+//                dateFormatter.timeZone = .current
+//                let localDate = dateFormatter.string(from: date)
+//            tempInfoLabel.text = "Time : \(localDate)"
             
-            let date = Date(timeIntervalSince1970: itemData?.dt ?? 0)
-                let dateFormatter = DateFormatter()
-                dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
-                dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
-                dateFormatter.timeZone = .current
-                let localDate = dateFormatter.string(from: date)
-            tempInfoLabel.text = "Time : \(localDate)"
+            let date = NSDate(timeIntervalSince1970: itemData?.dt ?? 0)
+
+            let dayTimePeriodFormatter = DateFormatter()
+            dayTimePeriodFormatter.dateFormat = "MMM dd YYYY hh:mm a"
+
+            let dateString = dayTimePeriodFormatter.string(from: date as Date)
+            tempInfoLabel.text = "Time : \(dateString)"
+
             
             if itemData?.weather?[0].main == "Clouds" {
                 CallLottie(jsonFile: "cloudy")
@@ -52,6 +60,8 @@ class WeatherTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        weatherView.backgroundColor = .clear
+        bgView.setGradientBackground(colorTop: .random(), colorBottom: .random())
         // Initialization code
     }
 

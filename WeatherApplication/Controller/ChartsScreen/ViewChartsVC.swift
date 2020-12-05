@@ -25,16 +25,13 @@ class ViewChartsVC: UIViewController {
         }
         
         let line1 = LineChartDataSet(entries: dataEntries, label: "Weather App")
-        line1.colors = [NSUIColor.black]
-        
-//        line1.circleColors = [NSUIColor.blue]
-//        line1.fillColor = .black
-//        line1.highlightColor = .yellow
-        
+        line1.colors = ChartColorTemplates.colorful()//[NSUIColor.black]
+ 
         let data = LineChartData()
         data.addDataSet(line1)
         barChart.data = data
         barChart.chartDescription?.text = "Weather App"
+        
     }
     
 }

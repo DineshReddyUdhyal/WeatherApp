@@ -28,8 +28,16 @@ class SplashVC: UIViewController {
         UIView.animate(withDuration: 1.0, delay: 1.0, options: .curveEaseOut, animations: {
             self.bgImage.alpha = 0.0
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
-                let vc = mainSB.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-                self.navigationController?.pushViewController(vc, animated: true)
+                
+                if UserDefaults.standard.bool(forKey: sessionKey.loggedInStatus) == true{
+                    let vc = homeSB.instantiateViewController(withIdentifier: "HomeVC")
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let vc = mainSB.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                
             }
         }, completion: nil)
 

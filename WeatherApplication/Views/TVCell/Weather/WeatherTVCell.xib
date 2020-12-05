@@ -65,15 +65,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="CityNameLabel" destination="YaU-QX-gjx" id="zoO-7T-sMt"/>
+                <outlet property="bgView" destination="UiR-Xg-sWE" id="ibl-Yh-m9T"/>
                 <outlet property="tempInfoLabel" destination="gDJ-SQ-EEl" id="47s-5w-Y5y"/>
                 <outlet property="weatherView" destination="2Mh-Ej-aqR" id="NRH-Hy-2uR"/>
             </connections>
             <point key="canvasLocation" x="147.10144927536234" y="43.191964285714285"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="2Mh-Ej-aqR"/>
-    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -24,8 +24,10 @@ class WeatherVC: UIViewController {
         weatherTableView.register(WeatherTVCell.cellNib, forCellReuseIdentifier: WeatherTVCell.cellId)
         weatherTableView.tableFooterView = UIView()
         getWeatherList()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Weather", style: .plain, target: self, action: #selector(btnViewCharts))
-        // Do any additional setup after loading the view.
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Weather Graph", style: .plain, target: self, action: #selector(btnViewCharts))
+        
+        
     }
     
     @objc func btnViewCharts(){

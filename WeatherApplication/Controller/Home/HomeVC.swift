@@ -19,6 +19,7 @@ class HomeVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var cardView: UIView!
     
     var lat = Double()
     var long = Double()
@@ -36,6 +37,12 @@ class HomeVC: UIViewController, UITextFieldDelegate {
             emptyView.isHidden = false
             self.cityTF.text = defaults ?? ""
             
+            let latDefaults = UserDefaults.standard.string(forKey: "latValue")
+            self.lat = Double(latDefaults ?? "0.0")!
+            
+            let longDefaults = UserDefaults.standard.string(forKey: "longValue")
+            self.long = Double(longDefaults ?? "0.0")!
+            
             DispatchQueue.global(qos: .background).async {
                 self.getWeather(city_name: defaults ?? "")
             }
@@ -45,8 +52,12 @@ class HomeVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        cardView.clipsToBounds = true
+        cardView.setGradientBackground(colorTop: UIColor(red:0.87, green:0.25, blue:0.30, alpha:1.0), colorBottom: UIColor(red:0.95, green:0.37, blue:0.34, alpha:0.6))
+        
         cityTF.delegate = self
         cityTF.placeholder = "Please enter city name"
         cityListTableView.delegate = self
@@ -54,10 +65,21 @@ class HomeVC: UIViewController, UITextFieldDelegate {
         cityListTableView.tableFooterView = UIView()
         cityListTableView.register(CityTVCell.cellNib, forCellReuseIdentifier: CityTVCell.cellId)
         cityTF.addTarget(self, action: #selector(HomeVC.textFieldDidChange(_:)), for: .editingChanged)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(btnLogout))
 
         getCityListData()
         
     }
+    
+    @objc func btnLogout(){
+        UserDefaults.standard.setValue(false, forKey: sessionKey.loggedInStatus)
+        let vc = mainSB.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         
         let searchText = cityTF.text!
@@ -71,6 +93,13 @@ class HomeVC: UIViewController, UITextFieldDelegate {
         // User finished typing (hit return): hide the keyboard.
         textField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func btnViewMore(_ sender: Any) {
+        let vc = homeSB.instantiateViewController(withIdentifier: "WeatherVC") as! WeatherVC
+        vc.getLat = self.lat.description
+        vc.getLon = self.long.description
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func getCityListData() {
@@ -105,6 +134,8 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.lat = self.searchArray[indexPath.row].coord?.lat ?? 0
         self.long = self.searchArray[indexPath.row].coord?.lon ?? 0
+        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lat ?? 0, forKey: "latValue")
+        UserDefaults.standard.setValue(self.searchArray[indexPath.row].coord?.lon ?? 0, forKey: "longValue")
         UserDefaults.standard.setValue(self.searchArray[indexPath.row].name, forKey: "City_Name")
         print("Lat = \(self.lat) and lat = \(self.long)")
         
@@ -131,18 +162,18 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource {
                 //MARK:  for lottie weather according to weather report
                 if self.HomeVM.cityWeather?.weather?[0].main?.contains("Clear") == true{
                     self.CallLottie(jsonFile: "sunny")
-                    self.emptyView.backgroundColor = UIColor(red: 0.36, green: 0.79, blue: 1.00, alpha: 0.7)
+                    //self.emptyView.backgroundColor = UIColor(red: 0.36, green: 0.79, blue: 1.00, alpha: 0.7)
                    
                 } else if self.HomeVM.cityWeather?.weather?[0].main?.contains("Clouds") == true {
                     self.CallLottie(jsonFile: "rainy")
-                    self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
+                    //self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
                 } else if self.HomeVM.cityWeather?.weather?[0].main?.contains("Drizzle") == true {
                     self.CallLottie(jsonFile: "rainy")
-                    self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
+                    //self.emptyView.backgroundColor = UIColor(red: 0.56, green: 0.60, blue: 0.63, alpha: 0.7)
                 }
                 else {
                     self.CallLottie(jsonFile: "cloudy")
-                    self.emptyView.backgroundColor = UIColor(red: 0.82, green: 0.89, blue: 0.93, alpha: 0.7)
+                    //self.emptyView.backgroundColor = UIColor(red: 0.82, green: 0.89, blue: 0.93, alpha: 0.7)
                 }
                 
                 self.placeLabel.text = "Place : \(self.HomeVM.cityWeather?.sys?.country ?? "") , \(self.HomeVM.cityWeather?.name ?? "")"
